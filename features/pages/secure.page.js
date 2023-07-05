@@ -1,9 +1,9 @@
-const BasePage = require('./base.page')
+// const BasePage = require('./base.page')
 
-class SecurePage extends BasePage {
+// class SecurePage extends BasePage {
 
-    get secureAreaElement () { return $('div[class="example"] h2') }
-    get messageElement () { return $('#flash') }
-}
+//     get secureAreaElement () { return $('div[class="example"] h2') }
+//     get messageElement () { return $('#flash') }
+// }
 
-module.exports = new SecurePage();
+// module.exports = new SecurePage();

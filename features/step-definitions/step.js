@@ -1,40 +1,31 @@
 const { Given, When, Then } = require('@cucumber/cucumber');
 const LoginPage = require('../pages/login.page');
-const SecurePage = require('../pages/secure.page');
+const DashboardPage = require('../pages/dashboard.page');
 
-Given('the user is on login page', function () {
+Given('I am on the login page', () => {
     LoginPage.open();
-    expect(browser).toHaveTitle('The Internet');
+    expect(browser).toHaveTitle('hai, kasirAja');
 });
 
-When('the user enters username as {string} and password as {string}', function (username, password) {
-    LoginPage.userNameTextBox.setValue(username);
-    LoginPage.passwordTextBox.setValue(password);
+When('I input email as {string} and passwrod as {string}', (email, password) => {
+    LoginPage.EmailTextField.setValue(email);
+    LoginPage.PasswordTextField.setValue(password);
 });
 
-
-When('clicks on login button', function () {
-    LoginPage.loginButton.click();
-
+When('I click button login', () => {
+    LoginPage.ButtonLogin.click();
 });
 
-Then('the user must navigate to secure area page displaying a message {string}', function (successMessage) {    
-    expect(SecurePage.secureAreaElement).toExist();
-    expect(SecurePage.secureAreaElement).toHaveTextContaining('Secure Area');
-
-    expect(SecurePage.messageElement).toExist();
-    expect(SecurePage.messageElement).toHaveTextContaining(successMessage);
+Then('I must navigate to dashboard page', () => {
+    expect(DashboardPage.DashboardElement).toExist();
+    expect(DashboardPage.DashboardElement).toHaveTextContaining('kasirAja');
 
 });
 
-Then('the user must remain on login page displaying a message {string}', function (errorMessage) {
+Then('I must remain on login page displaying a message {string}', (ErrorMessage) => {
+    expect(LoginPage.TitleProduk).toExist();
+    expect(LoginPage.TitleProduk).toHaveTextContaining('hai, kasirAja');
 
-    expect(LoginPage.loginPageElement).toExist();
-
-    expect(LoginPage.loginPageElement).toHaveTextContaining('Login Page');
-
-    expect(LoginPage.messageElement).toExist();
-
-    expect(LoginPage.messageElement).toHaveTextContaining(errorMessage);
-
+    expect(LoginPage.ErrorMessage).toExist();
+    expect(LoginPage.ErrorMessage).toHaveTextContaining(ErrorMessage);
 });

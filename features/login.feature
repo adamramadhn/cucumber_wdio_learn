@@ -1,19 +1,22 @@
 Feature: To test the login functionality in "The Internet Herokuapp"
 
     Background:
-        Given the user is on login page
+        Given I am on the login page
 
-    Scenario: The one where user logs in using valid credentials
-        When the user enters username as "tomsmith" and password as "SuperSecretPassword!"
-        And clicks on login button
-        Then the user must navigate to secure area page displaying a message "You logged into a secure area!"
-
-    Scenario Outline: The one where user logs in using invalid credentials
-        When the user enters username as "<username>" and password as "<password>"
-        And clicks on login button
-        Then the user must remain on login page displaying a message "<errorMessage>"
+    Scenario: As User I can successfully login in sauce-demo
+        When I input email as "<email>" and passwrod as "<password>"
+        And I click button login
+        Then I must navigate to dashboard page
 
         Examples:
-            | username | password             | errorMessage      |
-            | james    | SuperSecretPassword! | Invalid username! |
-            | tomsmith | SuperPassword!       | Invalid password! |
+            | email             | password  |
+            | alex@gmail.com    | alex      |
+
+    Scenario Outline:  must navigate to dashboard page
+        When I input email as "<email>" and passwrod as "<password>"
+        And I click button login
+        Then I must remain on login page displaying a message "<errorMessage>"
+
+        Examples:
+            | email             | password             | errorMessage                        |
+            | alex@gmail.com    |                      | password is not allowed to be empty |
