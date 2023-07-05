@@ -26,7 +26,7 @@ exports.config = {
     //
     specs: [
         // ToDo: define location for spec files here
-        './features/**/*.feature'
+        './features/**/kategori.feature'
     ],
     // Patterns to exclude.
     exclude: [
@@ -130,16 +130,16 @@ exports.config = {
     // The only one supported by default is 'dot'
     // see also: https://webdriver.io/docs/dot-reporter
     // reporters: ['spec'],
-    reporters: [['allure', {
-        outputDir: 'reports/allure-results',
-        disableWebdriverStepsReporting: true,
-    }]],
+    // reporters: [['allure', {
+    //     outputDir: 'reports/allure-results',
+    //     disableWebdriverStepsReporting: true,
+    // }]],
 
     //
     // If you are using Cucumber you need to specify the location of your step definitions.
     cucumberOpts: {
         // <string[]> (file/dir) require files before executing features
-        require: ['./features/step-definitions/step.js'],
+        require: ['./features/step-definitions/kategori.js'],
         // <boolean> show full backtrace for errors
         backtrace: false,
         // <string[]> ("extension:module") require files with the given EXTENSION after requiring MODULE (repeatable)
@@ -272,13 +272,13 @@ exports.config = {
      * @param {number}                 result.duration  duration of scenario in milliseconds
      * @param {object}                 context          Cucumber World object
      */
-    afterStep: async function (step, scenario, { error, duration, passed }, context) {
-        if (error) {
-            await browser.takeScreenshot();
-        } else if (passed) {
-            await browser.takeScreenshot();
-        }
-    },
+    // afterStep: async function (step, scenario, { error, duration, passed }, context) {
+    //     if (error) {
+    //         await browser.takeScreenshot();
+    //     } else if (passed) {
+    //         await browser.takeScreenshot();
+    //     }
+    // },
     /**
      *
      * Runs after a Cucumber Feature.
@@ -322,26 +322,26 @@ exports.config = {
      * @param {Array.<Object>} capabilities list of capabilities details
      * @param {<Object>} results object containing test results
      */
-    onComplete: function () {
-        const reportError = new Error('Could not generate Allure report')
-        const generation = allure(['generate', 'reports/allure-results', '--clean'])
-        return new Promise((resolve, reject) => {
-            const generationTimeout = setTimeout(
-                () => reject(reportError),
-                5000)
+    // onComplete: function () {
+    //     const reportError = new Error('Could not generate Allure report')
+    //     const generation = allure(['generate', 'reports/allure-results', '--clean'])
+    //     return new Promise((resolve, reject) => {
+    //         const generationTimeout = setTimeout(
+    //             () => reject(reportError),
+    //             5000)
 
-            generation.on('exit', function (exitCode) {
-                clearTimeout(generationTimeout)
+    //         generation.on('exit', function (exitCode) {
+    //             clearTimeout(generationTimeout)
 
-                if (exitCode !== 0) {
-                    return reject(reportError)
-                }
+    //             if (exitCode !== 0) {
+    //                 return reject(reportError)
+    //             }
 
-                console.log('Allure report successfully generated')
-                resolve()
-            })
-        })
-    }
+    //             console.log('Allure report successfully generated')
+    //             resolve()
+    //         })
+    //     })
+    // }
     /**
     * Gets executed when a refresh happens.
     * @param {string} oldSessionId session ID of the old session

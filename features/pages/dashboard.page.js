@@ -2,8 +2,26 @@
 const BasePage = require('./base.page.js')
 
 class DashboardPage extends BasePage {
-    get DashboardElement() {
-        return $('#root > div > div > div.css-tnxwfz > div > h3');
+
+    get ButtonKategori() {
+        return $('a[href="/categories"]');
+    }
+
+    get buttonTambahKategori() {
+        return $('a[href="/categories/create"]');
+    }
+
+    get inputNamaKategori() {
+        return $('#nama');
+    }
+    get inputDeskripsiKategori() {
+        return $('#deskripsi');
+    }
+    get buttonSubmitKategori() {
+        return $('button[type="button"]')
+    }
+    get message() {
+        return $('div[role="alert"]')
     }
 }
 
