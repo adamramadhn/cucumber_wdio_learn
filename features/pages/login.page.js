@@ -10,7 +10,7 @@ class LoginPage extends BasePage {
     }
 
     get ButtonLogin() {
-        return $('button[type="submit"]')
+        return $('button[type="submit"]');
     }
 
     get TitleProduk() {

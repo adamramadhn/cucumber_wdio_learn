@@ -14,5 +14,5 @@ Feature: To add category item
         Then I must see successfull message "<message>"
 
         Examples:
-            | nama  | deskripsi     | message         |
-            | ayam  | Ayam Goreng   | sukses ditambah |
+            | nama  | deskripsi     | message          |
+            | ayam  | Ayam Goreng   | item ditambahkan |

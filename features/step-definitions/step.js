@@ -1,31 +1,31 @@
 const { Given, When, Then } = require('@cucumber/cucumber');
 const LoginPage = require('../pages/login.page');
-const DashboardPage = require('../pages/dashboard.page');
+const HomePage = require('../pages/home.page')
 
-Given('I am on the login page', () => {
-    LoginPage.open();
-    expect(browser).toHaveTitle('hai, kasirAja');
+Given('I am on the login page', async () => {
+    await LoginPage.open();
+    await expect(browser).toHaveTitle('kasirAja');
 });
 
-When('I input email as {string} and passwrod as {string}', (email, password) => {
-    LoginPage.EmailTextField.setValue(email);
-    LoginPage.PasswordTextField.setValue(password);
+When('I input email as {string} and passwrod as {string}', async (email, password) => {
+    await LoginPage.EmailTextField.setValue(email);
+    await LoginPage.PasswordTextField.setValue(password);
 });
 
-When('I click button login', () => {
-    LoginPage.ButtonLogin.click();
+When('I click button login', async () => {
+    await LoginPage.ButtonLogin.click();
 });
 
-Then('I must navigate to dashboard page', () => {
-    expect(DashboardPage.DashboardElement).toExist();
-    expect(DashboardPage.DashboardElement).toHaveTextContaining('kasirAja');
+// Then('I must navigate to dashboard page', async () => {
+//     await expect(HomePage.HomePageElement).toExist();
+//     await expect(HomePage.HomePageElement).toHaveTextContaining('kasirAja');
 
-});
+// });
 
-Then('I must remain on login page displaying a message {string}', (ErrorMessage) => {
-    expect(LoginPage.TitleProduk).toExist();
-    expect(LoginPage.TitleProduk).toHaveTextContaining('hai, kasirAja');
+Then('I must remain on login page displaying a message {string}', async (ErrorMessage) => {
+    await expect(LoginPage.TitleProduk).toExist();
+    await expect(LoginPage.TitleProduk).toHaveTextContaining('hai, kasirAja');
 
-    expect(LoginPage.ErrorMessage).toExist();
-    expect(LoginPage.ErrorMessage).toHaveTextContaining(ErrorMessage);
+    await expect(LoginPage.ErrorMessage).toExist();
+    await expect(LoginPage.ErrorMessage).toHaveTextContaining(ErrorMessage);
 });

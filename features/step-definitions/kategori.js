@@ -1,6 +1,6 @@
 const { Given, When, Then } = require('@cucumber/cucumber');
 const LoginPage = require('../pages/login.page');
-const DashboardPage = require('../pages/dashboard.page');
+const KategoriElement = require('../pages/kategori.page');
 Given('the user is on login page', async () => {
     await LoginPage.open();
     await expect(browser).toHaveTitle('kasirAja');
@@ -20,22 +20,22 @@ When('I redirect to the dashboard page', async () => {
 });
 
 When('I click button named kategori', async () => {
-    await DashboardPage.ButtonKategori.click();
+    await KategoriElement.KategoriElement.click()
 })
 
-When('I click button add', () => {
-    DashboardPage.buttonTambahKategori.click();
+When('I click button add', async() => {
+    await KategoriElement.AddKategoriElement.click()
 })
 When('I input name as {string} and deskripsi {string}', async (nama, deskripsi) => {
-    await DashboardPage.inputNamaKategori.setValue(nama);
-    await DashboardPage.inputDeskripsiKategori.setValue(deskripsi);
+    await KategoriElement.InputNamaKategori.setValue(nama);
+    await KategoriElement.InputDeskripsiKategori.setValue(deskripsi);
 })
 
 When('I click button simpan', async () => {
-    await DashboardPage.buttonSubmitKategori.click();
+    await KategoriElement.ButtonSubmitKategori.click()
 
 })
 Then('I must see successfull message {string}', async (message) => {
-    await expect(DashboardPage.message).toHaveTitle(message);
+    await expect(KategoriElement.Message).toHaveTextContaining(message);
 })
 
